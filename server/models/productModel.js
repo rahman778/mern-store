@@ -23,17 +23,13 @@ const productSchema = new mongoose.Schema({
    price: {
       type: Number,
    },
-   taxable: {
-      type: Boolean,
-      default: false,
-   },
    isActive: {
       type: Boolean,
       default: true,
    },
-   brand: {
-      type: Schema.Types.ObjectId,
-      ref: "Brand",
+   category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
       default: null,
    },
 });

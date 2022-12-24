@@ -8,6 +8,8 @@ import errorMiddleware from './middlewares/errorMiddleware.js';
 //routes import
 import authRoute from './routes/authRoute.js'
 import userRoute from './routes/userRoute.js'
+import categoryRoute from './routes/categoryRoute.js'
+import productRoute from './routes/productRoute.js'
 
 const app = express();
 dotenv.config({ path: `config/config.env` })
@@ -19,11 +21,13 @@ app.use(cors());
 //routes
 app.use("/api/auth", authRoute);
 app.use("/api/user", userRoute);
+app.use("/api/category", categoryRoute);
+app.use("/api/product", productRoute);
 
 // error middleware
 app.use(errorMiddleware);
 
-connectDB();
+//connectDB();
 
 const PORT = process.env.PORT || 4000;
 
