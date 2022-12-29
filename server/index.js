@@ -1,9 +1,15 @@
+//import dotenv from 'dotenv'
+import * as dotenv from 'dotenv';
+//import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
-import dotenv from 'dotenv'
+
 import nodemailer from 'nodemailer'
 import connectDB from './config/db.js';
 import errorMiddleware from './middlewares/errorMiddleware.js';
+import path from 'path'
+import url from 'url';
+dotenv.config({ path: path.resolve('./config/config.env') })
 
 //routes import
 import authRoute from './routes/authRoute.js'
@@ -12,11 +18,15 @@ import categoryRoute from './routes/categoryRoute.js'
 import productRoute from './routes/productRoute.js'
 
 const app = express();
-dotenv.config({ path: `config/config.env` })
+// const __filename = url.fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
+
 
 //routes
 app.use("/api/auth", authRoute);
@@ -30,6 +40,8 @@ app.use(errorMiddleware);
 //connectDB();
 
 const PORT = process.env.PORT || 4000;
+
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

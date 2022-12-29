@@ -82,7 +82,7 @@ export const listProducts = async (req, res) => {
 // add product
 export const addProduct = async (req, res, next) => {
    const { name, description, quantity, price, category, slug, isActive } = req.body;
-   const image = req.file;
+   const imageUrl = req.file.location;
 
    try {
       const productData = {
@@ -91,6 +91,7 @@ export const addProduct = async (req, res, next) => {
          description,
          quantity,
          price,
+         imageUrl,
          category,
          isActive,
       };
