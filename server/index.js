@@ -37,7 +37,7 @@ app.use("/api/product", productRoute);
 // error middleware
 app.use(errorMiddleware);
 
-//connectDB();
+connectDB();
 
 const PORT = process.env.PORT || 4000;
 

@@ -1,16 +1,22 @@
 import { Routes, Route } from "react-router-dom";
+import { Toaster } from 'react-hot-toast';
+import { DrawerProvider } from "./context/DrawerContext";
+import { UserProvider } from "./context/UserContext";
 import Layout from "./layout/Layout";
-
+import ProductList from "./pages/ProductList";
 
 function App() {
    return (
-      <Routes>
-         <Route path="/" element={<Layout />}>
-            <Route path="/*" element={<Routes>
-              <Route path="/app" element={<h2>ggdgdgd</h2>} />
-            </Routes>} />
-         </Route>
-      </Routes>
+      <DrawerProvider>
+         <UserProvider>
+            <Routes>
+               <Route path="/" element={<Layout />}>
+                  <Route path="/" element={<ProductList />} />
+               </Route>
+            </Routes>
+            <Toaster />
+         </UserProvider>
+      </DrawerProvider>
    );
 }
 
