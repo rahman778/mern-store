@@ -1,13 +1,13 @@
 import express from "express";
 import { createCart, getAllCarts, getCartById, updateCart, deleteCart } from "../controllers/cartController.js";
 
-import { isAuthenticated } from "../middlewares/authMiddleware.js";
+import { isAuthenticated, isAdmin } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
 router.get("/:id", isAuthenticated, getCartById);
 
-router.get("/", getAllCarts);
+router.get("/", isAuthenticated, isAdmin, getAllCarts);
 
 router.post("/create", isAuthenticated, createCart);
 

@@ -31,8 +31,6 @@ function Signin({ onShowCreateAccount }) {
          setIsLoading(true);
          const { data } = await signIn({ email, password });
 
-         console.log("data", data);
-
          if (data.token) {
             hideDrawer();
             localStorage.setItem("AccessToken", JSON.stringify(data.token));

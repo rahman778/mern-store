@@ -1,11 +1,12 @@
 import React from "react";
 
-function Button({ title, loading, disabled }) {
+function Button({ title, loading, disabled, onClick }) {
    return (
       <button
          type="submit"
          disabled={disabled || loading}
-         className="transition duration-300 ease-in-out w-full bg-primary text-white border shadow py-3 px-6 font-semibold text-md rounded-sm hover:bg-primary hover:opacity-90 disabled:opacity-60"
+         className="rounded-md bg-gray-900 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800 w-full"
+         onClick={onClick}
       >
          {loading ? (
             <>

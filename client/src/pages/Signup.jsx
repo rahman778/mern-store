@@ -28,8 +28,6 @@ function Signup({ onShowSignin }) {
          setIsLoading(true);
          const data = await signUp({ email, password });
 
-         console.log("data", data);
-
          localStorage.setItem("AccessToken", JSON.stringify(data.token));
 
          toast.success("Signup successful 🔓");

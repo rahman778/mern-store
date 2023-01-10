@@ -11,7 +11,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require('tailwind-scrollbar')({ nocompatible: true }),require("daisyui")],
   daisyui: {
     styled: true,
     themes: false,

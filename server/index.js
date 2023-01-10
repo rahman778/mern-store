@@ -18,6 +18,7 @@ import categoryRoute from "./routes/categoryRoute.js";
 import productRoute from "./routes/productRoute.js";
 import cartRoute from "./routes/cartRoute.js";
 import orderRoute from "./routes/orderRoute.js";
+import addressRoute from "./routes/addressRoute.js";
 
 const app = express();
 // const __filename = url.fileURLToPath(import.meta.url);
@@ -34,6 +35,7 @@ app.use("/api/category", categoryRoute);
 app.use("/api/product", productRoute);
 app.use("/api/cart", cartRoute);
 app.use("/api/order", orderRoute);
+app.use("/api/address", addressRoute);
 
 // error middleware
 app.use(errorMiddleware);

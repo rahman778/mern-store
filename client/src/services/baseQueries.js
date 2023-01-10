@@ -1,8 +1,6 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { Mutex } from "async-mutex";
 
-console.log('process.env.REACT_APP_API_URL', process.env.REACT_APP_API_URL)
-
 export const publicBaseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_API_URL,
 });

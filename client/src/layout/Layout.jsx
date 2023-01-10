@@ -6,6 +6,7 @@ import Drawer from "../components/Drawer";
 import Signin from "../pages/Signin";
 import { DrawerContext } from "../context/DrawerContext";
 import Signup from "../pages/Signup";
+import CartDrawer from "../components/CartDrawer";
 
 const Layout = () => {
    const { drawer } = useContext(DrawerContext);
@@ -24,6 +25,8 @@ const Layout = () => {
                   <Signin onShowCreateAccount={() => setShowRegister(true)} />
                )}
             </Drawer>
+
+            <Drawer isOpen={drawer.CART_DRAWER} header="YOUR CART"><CartDrawer /></Drawer>
 
             <div className="text-gray-700 mt-20 mx-auto px-2 lg:px-28 2xl:px-40 flex-grow h-full w-full">
                <main className="h-full">
