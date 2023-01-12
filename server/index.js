@@ -40,7 +40,7 @@ app.use("/api/address", addressRoute);
 // error middleware
 app.use(errorMiddleware);
 
-//connectDB();
+connectDB();
 
 const PORT = process.env.PORT || 4000;
 

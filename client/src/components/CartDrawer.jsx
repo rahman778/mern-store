@@ -25,7 +25,7 @@ function CartDrawer() {
 
          {cartSubtotal > 0 && (
             <div className="mt-5 flex items-center justify-between w-full">
-               <p class="font-bold text-lg text-gray-900 mb-0">Subtotal</p>
+               <p className="font-bold text-lg text-gray-900 mb-0">Subtotal</p>
 
                <Price
                   currency="$"

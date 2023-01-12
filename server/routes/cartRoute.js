@@ -1,5 +1,5 @@
 import express from "express";
-import { createCart, getAllCarts, getCartById, updateCart, deleteCart } from "../controllers/cartController.js";
+import { addCart, getAllCarts, getCartById, updateCart, deleteCart } from "../controllers/cartController.js";
 
 import { isAuthenticated, isAdmin } from "../middlewares/authMiddleware.js";
 
@@ -9,7 +9,7 @@ router.get("/:id", isAuthenticated, getCartById);
 
 router.get("/", isAuthenticated, isAdmin, getAllCarts);
 
-router.post("/create", isAuthenticated, createCart);
+router.post("/add", isAuthenticated, addCart);
 
 router.put("/update/:id", isAuthenticated, updateCart);
 

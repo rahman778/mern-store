@@ -19,7 +19,7 @@ export default function Drawer({ children, isOpen, setIsOpen, header }) {
             }
          >
             <article className="p-4 relative flex flex-col space-y-2 overflow-y-auto h-full">
-               <h3 className="font-semiBold text-center text-xl mt-3 mb-0">{header}</h3>
+               <h3 className="font-bold text-center text-2xl mt-2 mb-0">{header}</h3>
                <label
                   className="btn btn-sm btn-circle bg-zinc-200 border-zinc-200 text-zinc-600 absolute left-3 top-4 font-bold text-lg hover:text-white"
                   onClick={() => {

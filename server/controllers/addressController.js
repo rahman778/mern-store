@@ -1,13 +1,6 @@
 import Address from "../models/addressModel.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
-const express = require('express');
-const router = express.Router();
-
-// Bring in Models & Helpers
-const Address = require('../../models/address');
-const auth = require('../../middleware/auth');
-
 // add address api
 export const addAddress = async (req, res) => {
   try {

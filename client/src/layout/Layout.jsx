@@ -18,7 +18,10 @@ const Layout = () => {
          <div className="min-h-screen flex flex-col">
             <Nav />
 
-            <Drawer isOpen={drawer.AUTH_DRAWER}>
+            <Drawer
+               isOpen={drawer.AUTH_DRAWER}
+               header={showRegister ? "Register" : "Continue Shopping"}
+            >
                {showRegister ? (
                   <Signup onShowSignin={() => setShowRegister(false)} />
                ) : (
@@ -26,7 +29,9 @@ const Layout = () => {
                )}
             </Drawer>
 
-            <Drawer isOpen={drawer.CART_DRAWER} header="YOUR CART"><CartDrawer /></Drawer>
+            <Drawer isOpen={drawer.CART_DRAWER} header="Your Cart">
+               <CartDrawer />
+            </Drawer>
 
             <div className="text-gray-700 mt-20 mx-auto px-2 lg:px-28 2xl:px-40 flex-grow h-full w-full">
                <main className="h-full">

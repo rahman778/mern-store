@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation, redirect, NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
@@ -15,13 +15,19 @@ function Signin({ onShowCreateAccount }) {
 
    const { hideDrawer } = useContext(DrawerContext);
 
+   const [signIn, { error: signInError }] = useSignInMutation();
+
+   useEffect(() => {
+      if (signInError) {
+         setError(signInError.data.message);
+      }
+   }, [signInError]);
+
    const {
       register,
       handleSubmit,
       formState: { errors },
    } = useForm({ mode: "all" });
-
-   const [signIn] = useSignInMutation();
 
    const onSubmit = async (data) => {
       const { email, password } = data;
@@ -43,7 +49,6 @@ function Signin({ onShowCreateAccount }) {
          }, 1500);
       } catch (error) {
          setIsLoading(false);
-         setError(error.response?.data.message);
       }
    };
 
@@ -54,10 +59,7 @@ function Signin({ onShowCreateAccount }) {
             onSubmit={handleSubmit(onSubmit)}
             autoComplete="off"
          >
-            <h1 className="text-center text-zinc-700 font-semibold text-3xl mt-4 mb-6">
-               Continue Shopping
-            </h1>
-            <div className="">
+            <div className="mt-6">
                <label className="block">
                   <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
                      Email
@@ -98,7 +100,7 @@ function Signin({ onShowCreateAccount }) {
                </label>
             </div>
 
-            {error && <p className="mt-2 text-pink-600 text-sm">{error}</p>}
+            {error && <p className="mt-4 text-red-6000 text-sm">{error}</p>}
             {/* <div className="mt-4">
                <ForgotPasswordModal />
             </div> */}

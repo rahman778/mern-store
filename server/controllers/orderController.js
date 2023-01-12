@@ -1,7 +1,7 @@
 import Order from "../models/orderModel.js";
 
 // Add a new order
-export const createOrder = async (req, res) => {
+export const addOrder = async (req, res) => {
    const newOrder = new Order({
       user: req.body.user,
       cart: req.body.cart,
@@ -13,7 +13,7 @@ export const createOrder = async (req, res) => {
       const res = await newOrder.save();
       res.status(201).json(res);
    } catch (error) {
-      res.status(400).json({ message: "Unable to create order", error });
+      res.status(400).json({ message: "Unable to add order", error });
    }
 };
 

@@ -7,7 +7,7 @@ export const UserProvider = ({ children }) => {
    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
    useEffect(() => {
-      if (localStorage.getItem("AccessToken")) {
+      if (JSON.parse(localStorage.getItem("AccessToken"))) {
          setIsLoggedIn(true);
       }
    }, []);

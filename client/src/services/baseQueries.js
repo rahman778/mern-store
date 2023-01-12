@@ -8,7 +8,7 @@ export const publicBaseQuery = fetchBaseQuery({
 const baseQueryWithAuthHeaders = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_API_URL,
   prepareHeaders: (headers) => {
-    const token = sessionStorage.getItem("AccessToken");
+    const token = JSON.parse(localStorage.getItem("AccessToken"));
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }

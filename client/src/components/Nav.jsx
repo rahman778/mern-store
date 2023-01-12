@@ -7,6 +7,7 @@ import Drawer from "./Drawer";
 import Signin from "../pages/Signin";
 import { DrawerContext } from "../context/DrawerContext";
 import { CartContext } from "../context/CartContext";
+import { useGetUserQuery } from "../services/userService";
 // import { useUser } from "context/UserContext";
 
 const userData = {
@@ -19,6 +20,8 @@ const Nav = () => {
    const { cart } = useContext(CartContext);
    const { showDrawer } = useContext(DrawerContext);
    const { isLoggedIn, signOut } = useUser();
+
+   const { data: profileData } = useGetUserQuery();
 
    return (
       <nav className="flex items-center justify-between px-2 lg:px-28 2xl:px-40 py-2 shadow-sm fixed w-full bg-white top-0 z-10">
@@ -72,7 +75,7 @@ const Nav = () => {
                         className="menu dropdown-content bg-white p-2 shadow rounded-box w-52 mt-4"
                      >
                         <li>
-                           <a className="w-full py-2">@{userData?.username}</a>
+                           <a className="w-full py-2">{profileData?.firstName}</a>
                         </li>
                         <li>
                            <NavLink className="w-full py-2" to="/profile">
