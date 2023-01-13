@@ -23,19 +23,22 @@ const CartProvider = ({ children }) => {
    }, [cart]);
 
    const addItem = (item, quantity) => {
-      console.log('item', item,  quantity)
       const isExist = cart.find((product) => product._id === item._id);
       if (isExist) {
          setCart(
             cart.map((i) => {
                if (i._id === item._id) {
-                  return { ...i, quantity: i.quantity + quantity, subtotal: i.price * (i.quantity + quantity) };
+                  return {
+                     ...i,
+                     quantity: i.quantity + quantity,
+                     subtotal: i.price * (i.quantity + quantity),
+                  };
                }
                return i;
             })
          );
       } else {
-         const newItem = Object.assign({}, item, {quantity: 1, subtotal: item.price});
+         const newItem = Object.assign({}, item, { quantity: 1, subtotal: item.price });
          setCart([...cart, newItem]);
       }
    };
@@ -67,12 +70,21 @@ const CartProvider = ({ children }) => {
    };
 
    const clearCart = () => {
-      setCart([])
-   }
+      setCart([]);
+   };
 
    return (
       <CartContext.Provider
-         value={{ cart, clearCart, addItem, deleteItem, increment, decrement, cartSubtotal, cartTotal }}
+         value={{
+            cart,
+            clearCart,
+            addItem,
+            deleteItem,
+            increment,
+            decrement,
+            cartSubtotal,
+            cartTotal,
+         }}
       >
          {children}
       </CartContext.Provider>

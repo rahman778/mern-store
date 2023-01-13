@@ -30,9 +30,6 @@ const ProductDetailsPage = () => {
          setcartVal((val) => val - 1);
       }
    };
-   console.log("cartVal", cartVal);
-
-   console.log("product", product);
 
    return (
       <div className="2xl:container 2xl:mx-auto my-10">
@@ -40,17 +37,6 @@ const ProductDetailsPage = () => {
             {/* <!-- Preview Images Div For larger Screen--> */}
 
             <div className=" w-full sm:w-96 md:w-8/12  lg:w-6/12 flex lg:flex-row flex-col lg:gap-8 sm:gap-6 gap-4">
-               {/* <div className=" w-full lg:w-4/12 grid lg:grid-cols-1 sm:grid-cols-4 grid-cols-2 gap-6">
-                        <div className="bg-gray-100 flex justify-center items-center py-4">
-                            <img src="https://i.ibb.co/0jX1zmR/sam-moqadam-kvmds-Tr-GOBM-unsplash-removebg-preview-1-1.png" alt="Wooden chair - preview 1" />
-                        </div>
-                        <div className="bg-gray-100 flex justify-center items-center py-4">
-                            <img src="https://i.ibb.co/7zv1N5Q/sam-moqadam-kvmds-Tr-GOBM-unsplash-removebg-preview-2.png" alt="Wooden chair - preview 2" />
-                        </div>
-                        <div className="bg-gray-100 flex justify-center items-center py-4">
-                            <img src="https://i.ibb.co/0jX1zmR/sam-moqadam-kvmds-Tr-GOBM-unsplash-removebg-preview-1-1.png" alt="Wooden chair- preview 3" />
-                        </div>
-                    </div> */}
                <div className=" w-full bg-gray-100 flex justify-center items-center">
                   <img src={product?.data?.imageUrl} alt="Wooden Chair Previw" />
                </div>

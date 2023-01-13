@@ -27,7 +27,7 @@ function Product(props) {
 
    const handleAddToCart = () => {
       addItem(props.productData, 1);
-      showDrawer("CART_DRAWER")
+      showDrawer("CART_DRAWER");
    };
 
    return (
@@ -35,7 +35,7 @@ function Product(props) {
          <a onClick={() => navigate(`/product/${_id}`)} className="cursor-pointer">
             <img
                className="h-56 rounded-t-lg object-cover mx-auto"
-               //src={imageUrl}
+               src={imageUrl}
                alt="product image"
             />
          </a>
@@ -46,9 +46,7 @@ function Product(props) {
          )}
 
          <div className="mt-4 px-5 pb-5">
-            <a href="#">
-               <h5 className=" font-semibold tracking-tight text-slate-900">{name}</h5>
-            </a>
+            <h5 className=" font-semibold tracking-tight text-slate-900">{name}</h5>
             <div className="mt-2.5 mb-5 flex items-center">
                {/* <span className="mr-2 rounded bg-yellow-200 px-2 py-0.5 text-xs font-semibold">
                   5.0
@@ -106,9 +104,7 @@ function Product(props) {
                      price={price}
                      customClass="text-xl font-bold text-slate-900"
                   />
-                  {discount && (
-                     <span className="text-sm text-slate-900 line-through">$299</span>
-                  )}
+                  {discount && <span className="text-sm text-slate-900 line-through">$299</span>}
                </p>
                <button
                   className="flex cursor-pointer items-center rounded-md bg-primary px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none"

@@ -35,13 +35,9 @@ function PaymentPage() {
             }),
          };
 
-         console.log("cartData", cartData);
-
          const cartRes = await addCart({
             values: { ...cartData },
          });
-
-         console.log("res", cartRes);
 
          const orderData = {
             cart: cartRes.data._id,
@@ -52,8 +48,6 @@ function PaymentPage() {
          const orderRes = await addOrder({
             values: { ...orderData },
          });
-
-         console.log("orderRes", orderRes);
 
          if (orderRes.data) {
             toast.success("Order added successfully");

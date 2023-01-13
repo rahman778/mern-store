@@ -72,7 +72,6 @@ export const listProducts = async (req, res) => {
       res.status(200).json({ items:products, page, pages: Math.ceil(count / pageSize) });
 
    } catch (error) {
-      console.log("error", error);
       res.status(400).json({
          error: "Your request could not be processed. Please try again.",
       });
@@ -110,7 +109,6 @@ export const addProduct = async (req, res, next) => {
          product,
       });
    } catch (error) {
-      console.log(error)
       return res.status(400).json({
          error: "Your request could not be processed. Please try again.",
       });

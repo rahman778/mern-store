@@ -1,4 +1,5 @@
 import Cart from "../models/cartModel.js";
+import Product from "../models/productModel.js";
 
 // Add a new cart
 export const addCart = async (req, res) => {
@@ -11,12 +12,13 @@ export const addCart = async (req, res) => {
          items,
       });
 
+      decreaseQuantity(items);
+
       res.status(201).json({
          success: true,
          data: newCart
       });
    } catch (error) {
-      console.log("error", error);
       res.status(400).json({
          error: "Unable to create cart.",
       });
@@ -66,3 +68,17 @@ export const deleteCart = async (req, res) => {
       res.status(400).json({ message: "Unable to delete cart", error });
    }
 };
+
+
+const decreaseQuantity = products => {
+   let bulkOptions = products.map(item => {
+     return {
+       updateOne: {
+         filter: { _id: item.product },
+         update: { $inc: { inventory: -item.quantity } }
+       }
+     };
+   });
+ 
+   Product.bulkWrite(bulkOptions);
+ };

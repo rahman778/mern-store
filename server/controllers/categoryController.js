@@ -5,9 +5,10 @@ export const getCategory = async (req, res, next) => {
    try {
       const slug = req.params.slug;
 
-      const categoryDoc = await Category.findOne({ $or: [{ _id: slug }, { slug: slug }], isActive: true }).populate(
-         "products"
-         );
+      const categoryDoc = await Category.findOne({
+         $or: [{ _id: slug }, { slug: slug }],
+         isActive: true,
+      }).populate("products");
 
       if (!categoryDoc) {
          return next(new ErrorHandler("No product found", 404));
@@ -40,18 +41,24 @@ export const listCategory = async (req, res, next) => {
 export const addCategory = async (req, res, next) => {
    const { name, isActive } = req.body;
 
-   if (!name) {
-      return next(new ErrorHandler("You must enter a name", 400));
+   try {
+      if (!name) {
+         return next(new ErrorHandler("You must enter a name", 400));
+      }
+
+      const categoryData = {
+         name,
+         isActive,
+      };
+
+      const category = await Category.create(categoryData);
+
+      res.status(201).json(category);
+   } catch (error) {
+      res.status(400).json({
+         error: "Your request could not be processed. Please try again.",
+      });
    }
-
-   const categoryData = {
-      name,
-      isActive,
-   };
-
-   const category = await Category.create(categoryData);
-
-   res.status(201).json(category);
 };
 
 //update category
