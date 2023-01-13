@@ -11,6 +11,7 @@ export const cartAPI = createApi({
             method: "POST",
             body: { ...values },
          }),
+         transformResponse: (response) => response.data,
       }),
       getCart: build.query({
          query: ({ cartId }) => ({

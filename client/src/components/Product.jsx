@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { ShoppingCart } from "react-feather";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import { DrawerContext } from "../context/DrawerContext";
 import Price from "./Price";
 
 function Product(props) {
    const {
-      id,
+      _id,
       name,
       slug,
       imageUrl,
@@ -19,7 +20,9 @@ function Product(props) {
       discount,
    } = props.productData;
 
-   const { cart, addItem } = useContext(CartContext);
+   const navigate = useNavigate();
+
+   const { addItem } = useContext(CartContext);
    const { showDrawer } = useContext(DrawerContext);
 
    const handleAddToCart = () => {
@@ -29,14 +32,14 @@ function Product(props) {
 
    return (
       <div className="relative w-full max-w-[24rem] overflow-hidden rounded-sm bg-white shadow-md">
-         <a href="#">
+         <a onClick={() => navigate(`/product/${_id}`)} className="cursor-pointer">
             <img
                className="h-56 rounded-t-lg object-cover mx-auto"
-               src={imageUrl}
+               //src={imageUrl}
                alt="product image"
             />
          </a>
-         {discount !== null && (
+         {discount && (
             <span className="absolute top-0 left-0 w-28 translate-y-4 -translate-x-6 -rotate-45 bg-black text-center text-sm text-white">
                Sale
             </span>
@@ -103,7 +106,7 @@ function Product(props) {
                      price={price}
                      customClass="text-xl font-bold text-slate-900"
                   />
-                  {discount !== null && (
+                  {discount && (
                      <span className="text-sm text-slate-900 line-through">$299</span>
                   )}
                </p>

@@ -17,7 +17,7 @@ export const getProduct = async (req, res, next) => {
       }
 
       res.status(200).json({
-         product: productDoc,
+         data: productDoc,
       });
    } catch (error) {
       res.status(400).json({
@@ -69,7 +69,7 @@ export const listProducts = async (req, res) => {
          .limit(pageSize)
          .skip(pageSize * (page - 1));
 
-      res.status(200).json({ products, page, pages: Math.ceil(count / pageSize) });
+      res.status(200).json({ items:products, page, pages: Math.ceil(count / pageSize) });
 
    } catch (error) {
       console.log("error", error);
@@ -81,15 +81,14 @@ export const listProducts = async (req, res) => {
 
 // add product
 export const addProduct = async (req, res, next) => {
-   const { name, description, quantity, price, category, slug, isActive } = req.body;
+   const { name, description, inventory, price, category, isActive } = req.body;
    const imageUrl = req.file.location;
 
    try {
       const productData = {
          name,
-         slug,
          description,
-         quantity,
+         inventory,
          price,
          imageUrl,
          category,

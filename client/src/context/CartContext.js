@@ -3,7 +3,7 @@ import React, { createContext, useState, useEffect } from "react";
 const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
-   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")));
+   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || []);
    const [cartSubtotal, setCartSubtotal] = useState(0);
    const [cartTotal, setCartTotal] = useState(0);
 
@@ -23,31 +23,31 @@ const CartProvider = ({ children }) => {
    }, [cart]);
 
    const addItem = (item, quantity) => {
-      const isExist = cart.find((product) => product.id === item.id);
+      console.log('item', item,  quantity)
+      const isExist = cart.find((product) => product._id === item._id);
       if (isExist) {
          setCart(
             cart.map((i) => {
-               if (i.id === item.id) {
-                  return { ...i, quantity: i.quantity + 1, subtotal: i.price * (i.quantity + 1) };
+               if (i._id === item._id) {
+                  return { ...i, quantity: i.quantity + quantity, subtotal: i.price * (i.quantity + quantity) };
                }
                return i;
             })
          );
       } else {
-         item.quantity = 1;
-         item.subtotal = item.price;
-         setCart([...cart, item]);
+         const newItem = Object.assign({}, item, {quantity: 1, subtotal: item.price});
+         setCart([...cart, newItem]);
       }
    };
 
    const deleteItem = (item) => {
-      setCart(cart.filter((i) => i.id !== item.id));
+      setCart(cart.filter((i) => i._id !== item._id));
    };
 
    const increment = (item) => {
       setCart(
          cart.map((i) => {
-            if (i.id === item.id) {
+            if (i._id === item._id) {
                return { ...i, quantity: i.quantity + 1, subtotal: i.price * (i.quantity + 1) };
             }
             return i;
@@ -58,7 +58,7 @@ const CartProvider = ({ children }) => {
    const decrement = (item) => {
       setCart(
          cart.map((i) => {
-            if (i.id === item.id && i.quantity > 1) {
+            if (i._id === item._id && i.quantity > 1) {
                return { ...i, quantity: i.quantity - 1, subtotal: i.price * (i.quantity - 1) };
             }
             return i;
@@ -66,9 +66,13 @@ const CartProvider = ({ children }) => {
       );
    };
 
+   const clearCart = () => {
+      setCart([])
+   }
+
    return (
       <CartContext.Provider
-         value={{ cart, addItem, deleteItem, increment, decrement, cartSubtotal, cartTotal }}
+         value={{ cart, clearCart, addItem, deleteItem, increment, decrement, cartSubtotal, cartTotal }}
       >
          {children}
       </CartContext.Provider>

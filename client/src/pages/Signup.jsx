@@ -32,7 +32,7 @@ function Signup({ onShowSignin }) {
    const onSubmit = async (values) => {
       let formValues = {
          ...values,
-         role: "ROLE_ADMIN",
+         role: "ROLE_CUSTOMER",
       };
 
       try {

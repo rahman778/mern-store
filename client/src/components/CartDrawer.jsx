@@ -6,10 +6,18 @@ import { ArrowRight, ShoppingCart } from "react-feather";
 import Counter from "./Counter";
 import { CartContext } from "../context/CartContext";
 import Price from "./Price";
+import { DrawerContext } from "../context/DrawerContext";
 
 function CartDrawer() {
    const navigate = useNavigate();
    const { cart, cartSubtotal } = useContext(CartContext);
+   const { hideDrawer } = useContext(DrawerContext);
+
+   const handleBtnClick = (route) => {
+      navigate(route);
+      hideDrawer();
+   };
+
    return (
       <div>
          <div className="pr-1 h-[49vh] overflow-y-auto overflow-x-hidden scrollbar scrollbar-thumb-slate-400 scrollbar-thumb-rounded scrollbar-w-1">
@@ -39,7 +47,7 @@ function CartDrawer() {
             <button
                type="button"
                className="group inline-flex w-full items-center justify-center rounded-md bg-gray-700 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-600"
-               onClick={() => navigate("/cart")}
+               onClick={() => handleBtnClick("/cart")}
             >
                Cart
                <ShoppingCart
@@ -52,7 +60,7 @@ function CartDrawer() {
          <button
             type="button"
             className="group inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800"
-            onClick={() => navigate("/information")}
+            onClick={() => handleBtnClick("/information")}
          >
             Checkout
             <ArrowRight fontSize={12} className="group-hover:ml-8 ml-4 h-6 w-6 transition-all" />

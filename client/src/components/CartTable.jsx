@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { X } from "react-feather";
+import { CartContext } from "../context/CartContext";
 import Counter from "./Counter";
+import Price from "./Price";
 
-function CartTable() {
+function CartTable({ cart }) {
+   const { increment, decrement, deleteItem } = useContext(CartContext);
+   const onIncrement = (item) => {
+      increment(item);
+   };
+
+   const onDecrement = (item) => {
+      decrement(item);
+   };
+
+   const onDeleteItem = (item) => {
+      deleteItem(item);
+   };
+
    return (
       <div className="overflow-x-auto w-full">
          <table className="table w-full">
@@ -17,32 +32,39 @@ function CartTable() {
                </tr>
             </thead>
             <tbody>
-               <tr>
-                  <th>
-                     <X className="cursor-pointer"/>
-                  </th>
-                  <td>
-                     <div className="flex items-center space-x-3">
-                        <div className="avatar">
-                           <div className="mask mask-squircle w-12 h-12">
-                              <img src="https://placeimg.com/400/225/arch" alt="product" />
-                           </div>
+               {cart.map((item) => (
+                  <tr>
+                     <th>
+                        <X className="cursor-pointer" onClick={() => onDeleteItem(item)} />
+                     </th>
+                     <td>
+                        <div className="flex items-center space-x-3">
+                                 <img src={item.imageUrl} alt="product" className="h-16 w-20 rounded-md border object-cover object-center"/>
                         </div>
-                     </div>
-                  </td>
-                  <td>
-                     <div>Hart Hagerty</div>
-                  </td>
-                  <td>$17.00</td>
-                  <th>
-                     <Counter  width={"w-20"} height="h-8"/>
-                  </th>
-                  <td>
-                     <div>
-                        <div className="font-bold">$17.00</div>
-                     </div>
-                  </td>
-               </tr>
+                     </td>
+                     <td>
+                        <div>{item.name}</div>
+                     </td>
+                     <td>
+                        {" "}
+                        <Price currency="$" price={item.price} />
+                     </td>
+                     <th>
+                        <Counter
+                           width={"w-20"}
+                           height="h-8"
+                           value={item.quantity}
+                           onIncrement={() => onIncrement(item)}
+                           onDecrement={() => onDecrement(item)}
+                        />
+                     </th>
+                     <td>
+                        <div>
+                           <Price currency="$" price={item.subtotal} customClass="font-bold" />
+                        </div>
+                     </td>
+                  </tr>
+               ))}
             </tbody>
          </table>
       </div>

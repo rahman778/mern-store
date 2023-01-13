@@ -2,16 +2,15 @@ import Order from "../models/orderModel.js";
 
 // Add a new order
 export const addOrder = async (req, res) => {
-   const newOrder = new Order({
-      user: req.body.user,
-      cart: req.body.cart,
-      status: req.body.status,
-      totalPrice: req.body.totalPrice,
-   });
-
    try {
-      const res = await newOrder.save();
-      res.status(201).json(res);
+      const newOrder = await Order.create({
+         user: req.user._id,
+         cart: req.body.cart,
+         totalPrice: req.body.totalPrice,
+         type: req.body.type,
+      });
+
+      res.status(201).json({ success: true, data: newOrder });
    } catch (error) {
       res.status(400).json({ message: "Unable to add order", error });
    }
@@ -42,7 +41,9 @@ export const getOrderById = async (req, res) => {
 // Update an order
 export const updateOrder = async (req, res) => {
    try {
-      const order = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      const order = await Order.findByIdAndUpdate(req.params.id, req.body, {
+         new: true,
+      });
       res.status(200).json(order);
    } catch (error) {
       res.status(400).json({ message: "Unable to update order", error });

@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import Input from "../components/Input";
+import { useUser } from "../context/UserContext";
 import OrderProgessLayout from "../layout/OrderProgessLayout";
+import { useAddAddressMutation } from "../services/addressService";
+import { useGetUserQuery } from "../services/userService";
 
 function InformationPage() {
    const navigate = useNavigate();
+   const { isLoggedIn } = useUser();
 
    const [isLoading, setIsLoading] = useState(false);
+
+   const { data: profileData } = useGetUserQuery({}, { skip: !isLoggedIn });
+
+   const [addAddress, { error: addAddressError }] = useAddAddressMutation();
+
+   useEffect(() => {
+      if (addAddressError) {
+         toast.error(addAddressError.data.message);
+      }
+   }, [addAddressError]);
 
    const {
       register,
@@ -16,11 +31,32 @@ function InformationPage() {
       formState: { errors },
    } = useForm({ mode: "onBlur" });
 
-   const onSubmit = async (data) => {
-      navigate("/payment");
+   const onSubmit = async (values) => {
+      if (!isLoggedIn) {
+         toast.error("Please login to continue 🔓")
+         return;
+      } 
+      setIsLoading(true);
+
+      try {
+         const { data } = await addAddress({
+            values: {...values},
+         });
+
+         if (data.success) {
+            toast.success("Address added successfully");
+            navigate("/shipping");
+         }
+
+         setIsLoading(false);
+         
+      } catch (error) {
+         setIsLoading(false);
+      }
    };
+
    return (
-      <OrderProgessLayout title="PERSONAL INFORMATION">
+      <OrderProgessLayout title="Personal Information">
          <form
             className="flex flex-col w-full px-2"
             onSubmit={handleSubmit(onSubmit)}
@@ -102,12 +138,15 @@ function InformationPage() {
                </label>
                <label className="block md:w-1/2">
                   <span className="block text-sm font-medium text-slate-700">Zip Code</span>
-                  <Input id="zipCode" labelText="Last Name" />
+                  <Input id="zipCode" labelText="Zip Code" />
                </label>
             </div>
 
             <div className="mt-8 mb-6">
-               <Button title="Countinue Shopping" loading={isLoading} />
+               <Button
+                  title={isLoggedIn ? "Countinue Shopping" : "SignIn to continue"}
+                  loading={isLoading}
+               />
             </div>
          </form>
       </OrderProgessLayout>

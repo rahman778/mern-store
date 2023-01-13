@@ -1,4 +1,13 @@
 import mongoose from "mongoose";
+import slug from "mongoose-slug-generator";
+
+const options = {
+   separator: '-',
+   lang: 'en',
+   truncate: 120
+ };
+
+ mongoose.plugin(slug, options);
 
 const productSchema = new mongoose.Schema({
    name: {
@@ -17,7 +26,7 @@ const productSchema = new mongoose.Schema({
       type: String,
       trim: true,
    },
-   stock: {
+   inventory: {
       type: Number,
    },
    price: {

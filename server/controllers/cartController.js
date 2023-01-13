@@ -2,16 +2,24 @@ import Cart from "../models/cartModel.js";
 
 // Add a new cart
 export const addCart = async (req, res) => {
-   const newCart = new Cart({
-      user: req.body.user,
-      items: req.body.items,
-   });
-
    try {
-      const res = await newCart.save();
-      res.status(201).json(res);
+      const user = req.user._id;
+      const items = req.body.items;
+
+      const newCart = await Cart.create({
+         user,
+         items,
+      });
+
+      res.status(201).json({
+         success: true,
+         data: newCart
+      });
    } catch (error) {
-      res.status(400).json({ message: "Unable to create cart", error: err });
+      console.log("error", error);
+      res.status(400).json({
+         error: "Unable to create cart.",
+      });
    }
 };
 
@@ -40,7 +48,9 @@ export const getCartById = async (req, res) => {
 // Update a cart
 export const updateCart = async (req, res) => {
    try {
-      const cart = await Cart.findByIdAndUpdate(req.params.id, req.body, { new: true });
+      const cart = await Cart.findByIdAndUpdate(req.params.id, req.body, {
+         new: true,
+      });
       res.status(200).json(cart);
    } catch (error) {
       res.status(400).json({ message: "Unable to update cart", error });

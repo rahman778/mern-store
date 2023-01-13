@@ -11,6 +11,7 @@ export const orderAPI = createApi({
             method: "POST",
             body: { ...values },
          }),
+         transformResponse: (response) => response.data,
       }),
       getOrder: build.query({
          query: ({ orderId }) => ({
