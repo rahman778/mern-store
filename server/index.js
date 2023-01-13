@@ -9,7 +9,10 @@ import connectDB from "./config/db.js";
 import errorMiddleware from "./middlewares/errorMiddleware.js";
 import path from "path";
 import url from "url";
-dotenv.config({ path: path.resolve("./config/config.env") });
+
+if (process.env.NODE_ENV != "production") {
+   dotenv.config({ path: path.resolve("./config/config.env") });
+}
 
 //routes import
 import authRoute from "./routes/authRoute.js";
