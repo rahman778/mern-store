@@ -20,9 +20,10 @@ const Nav = () => {
 
    return (
       <nav className="flex items-center justify-between px-2 lg:px-28 2xl:px-40 py-2 shadow-sm fixed w-full bg-white top-0 z-10">
-         <Link to="/" className="text-gray-700 text-2xl font-bold dark:text-gray-400">
-            <h1>MERN Store</h1>
-         </Link>
+         <NavLink to="/" className="text-gray-700 text-2xl font-bold dark:text-gray-400 flex items-center space-x-4">
+            <img src="/logo.png" alt="" className="max-w-[48px]"/>
+            <h1 className="hidden md:inline-block">MERN Store</h1>
+         </NavLink>
 
          <ul className="flex space-x-4">
             <li>
@@ -63,7 +64,7 @@ const Nav = () => {
                   <div className="dropdown dropdown-end z-10">
                      <label tabIndex={0} className="btn btn-ghost rounded-btn">
                         <span className="lg:block hidden">Account</span>
-                        <User className="lg:hidden" />
+                        <User className="lg:hidden"/>
                      </label>
                      <ul
                         tabIndex={0}

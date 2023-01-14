@@ -22,11 +22,11 @@ function CartDrawer() {
       <div>
          <div className="pr-1 h-[49vh] overflow-y-auto overflow-x-hidden scrollbar scrollbar-thumb-slate-400 scrollbar-thumb-rounded scrollbar-w-1">
             <div>
-               {cart.map((item) => (
-                  <div className="mb-5">
+               {cart.length > 0 ? cart.map((item) => (
+                  <div className="mb-5" key={item._id}>
                      <CartItem cartData={item} />
                   </div>
-               ))}
+               )): <h4 className="mt-8 text-gray-600 text-xl text-center">You cart is empty</h4>}
             </div>
          </div>
          <hr className="my-5" />
@@ -48,11 +48,12 @@ function CartDrawer() {
                type="button"
                className="group inline-flex w-full items-center justify-center rounded-md bg-gray-700 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-600"
                onClick={() => handleBtnClick("/cart")}
+               disabled={cart.length === 0}
             >
                Cart
                <ShoppingCart
                   fontSize={12}
-                  className="group-hover:ml-8 ml-4 h-5 w-5 transition-all"
+                  className={`${cart.length !== 0 && "group-hover:ml-8"} ml-4 h-5 w-5 transition-all`}
                />
             </button>
          </div>
@@ -61,9 +62,10 @@ function CartDrawer() {
             type="button"
             className="group inline-flex w-full items-center justify-center rounded-md bg-gray-900 px-6 py-4 text-lg font-semibold text-white transition-all duration-200 ease-in-out focus:shadow hover:bg-gray-800"
             onClick={() => handleBtnClick("/information")}
+            disabled={cart.length === 0}
          >
             Checkout
-            <ArrowRight fontSize={12} className="group-hover:ml-8 ml-4 h-6 w-6 transition-all" />
+            <ArrowRight fontSize={12} className={`${cart.length !== 0 && "group-hover:ml-8"} ml-4 h-6 w-6 transition-all`} />
          </button>
       </div>
    );

@@ -13,7 +13,7 @@ function CartSummary({ checkoutLink }) {
       <div class="w-full bg-gray-50 rounded-md">
          <div class="flex flex-col lg:px-6 px-4 pb-4 justify-between overflow-y-auto">
             <div>
-               <p class="text-xl font-medium pt-4">Cart Summary</p>
+               <div class="text-xl font-medium pt-4">Cart Summary</div>
                <div class="mt-4 border-t border-b py-2">
                   <div class="flex items-center justify-between mt-4">
                      <p class="text-sm font-medium text-gray-900">Subtotal</p>

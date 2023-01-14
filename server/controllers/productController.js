@@ -65,8 +65,10 @@ export const listProducts = async (req, res) => {
          : {};
 
       const count = await Product.countDocuments({ ...keyword });
-      const products = await Product.find({ ...keyword })
-         .limit(pageSize)
+      const products = await Product.find({ ...keyword }).populate({
+         path: "category",
+         select: "name slug",
+      }).limit(pageSize)
          .skip(pageSize * (page - 1));
 
       res.status(200).json({ items:products, page, pages: Math.ceil(count / pageSize) });
@@ -109,6 +111,7 @@ export const addProduct = async (req, res, next) => {
          product,
       });
    } catch (error) {
+      console.log('error', error)
       return res.status(400).json({
          error: "Your request could not be processed. Please try again.",
       });

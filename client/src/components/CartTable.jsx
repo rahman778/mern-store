@@ -39,7 +39,7 @@ function CartTable({ cart }) {
                      </th>
                      <td>
                         <div className="flex items-center space-x-3">
-                                 <img src={item.imageUrl} alt="product" className="h-16 w-20 rounded-md border object-cover object-center"/>
+                                 <img src={item.imageUrl} alt="product" className="h-16 w-20 rounded-md border object-contain object-center"/>
                         </div>
                      </td>
                      <td>

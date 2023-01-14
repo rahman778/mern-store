@@ -25,7 +25,7 @@ function CartItem({ cartData }) {
       <div className="mt-8 space-y-3 bg-white">
          <div className="flex flex-col rounded-lg bg-white sm:flex-row">
             <img
-               className="m-2 ml-0 h-20 w-24 rounded-md border object-cover object-center"
+               className="m-2 ml-0 h-20 w-24 rounded-md border object-contain object-center"
                src={cartData.imageUrl}
                alt="product image"
             />
