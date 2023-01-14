@@ -3,7 +3,7 @@ import { Toaster } from "react-hot-toast";
 import { DrawerProvider } from "./context/DrawerContext";
 import { UserProvider } from "./context/UserContext";
 import Layout from "./layout/Layout";
-import ProductList from "./pages/ProductList";
+import ProductListPage from "./pages/ProductListPage";
 import { CartProvider } from "./context/CartContext";
 import CartPage from "./pages/CartPage";
 import InformationPage from "./pages/InformationPage";
@@ -19,7 +19,7 @@ function App() {
             <CartProvider>
                <Routes>
                   <Route path="/" element={<Layout />}>
-                     <Route path="/" element={<ProductList />} />
+                     <Route path="/" element={<ProductListPage />} />
                      <Route path="/product/:id" element={<ProductDetailsPage />} />
                      <Route path="/cart" element={<CartPage />} />
                      <Route path="/information" element={<InformationPage />} />

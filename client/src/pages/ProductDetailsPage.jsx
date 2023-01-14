@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import Counter from "../components/Counter";
 import Price from "../components/Price";
+import Spinner from "../components/Spinner";
 import { CartContext } from "../context/CartContext";
 import { DrawerContext } from "../context/DrawerContext";
 import { useGetProductQuery } from "../services/productService";
@@ -14,7 +15,7 @@ const ProductDetailsPage = () => {
    const { addItem } = useContext(CartContext);
    const { showDrawer } = useContext(DrawerContext);
 
-   const { data: product } = useGetProductQuery({ productId: id }, { skip: !id });
+   const { data: product, isLoading: productLoading } = useGetProductQuery({ productId: id }, { skip: !id });
 
    const handleAddToCart = () => {
       addItem(product.data, cartVal);
@@ -30,6 +31,14 @@ const ProductDetailsPage = () => {
          setcartVal((val) => val - 1);
       }
    };
+
+   if (productLoading) {
+      return (
+         <div className="min-h-[70vh] flex items-center justify-center">
+            <Spinner />
+         </div>
+      );
+   }
 
    return (
       <div className="2xl:container 2xl:mx-auto my-10">
